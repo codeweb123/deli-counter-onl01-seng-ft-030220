@@ -1,41 +1,28 @@
-var katzDeli = [];
+katz_deli = []
 
-function currentLine(line){
-  if(!line.length) {
-    return "The line is currently empty.";
-  }
-  var lineNamesandNumbers = [];
+def line(katz_deli)
+  line_positions = [];
+  if katz_deli.empty?
+    puts "The line is currently empty."
+  else
+    number = 1
+    katz_deli.each do |customer|
+      line_positions << "#{number}. #{customer}"
+      number += 1
+    end
+    puts "The line is currently: #{line_positions.join(" ")}"
+  end
+end
 
-  for(var i=0; i<line.length; i++) {
-    lineNamesandNumbers.push(i+1 + ". "+ line[i]);
-  }
-  console.log("The line is currently: " + lineNamesandNumbers)
-  return "The line is currently: " + lineNamesandNumbers.join(', ');
-}
+def take_a_number(katz_deli, name)
+  katz_deli << name
+  puts "Welcome, #{name}. You are number #{katz_deli.size} in line."
+end
 
-function nowServing(line) {
-  if(!line.length) {
-    console.log("There is nobody waiting to be served!")
-    return "There is nobody waiting to be served!"
-  } else {
-    //console.log("Currently serving " + line.shift());
-    return "Currently serving " + line.shift();
-  }
-}
-
-function takeANumber(line, name){
-  line.push(name);
-
-  console.log("Welcome, " + name + ". You are number " + line.length + " in line.");
-
-  return "Welcome, " + name + ". You are number " + line.length + " in line."
-}
-takeANumber(katzDeli, "Ada")
-takeANumber(katzDeli, "Grace")
-takeANumber(katzDeli, "Kent")
-currentLine(katzDeli);
-nowServing(katzDeli);
-takeANumber(katzDeli, "Matz");
-currentLine(katzDeli); 
-nowServing(katzDeli);
-currentLine(katzDeli)
+def now_serving(katz_deli)
+  if katz_deli.empty?
+    puts "There is nobody waiting to be served!"
+  else
+    puts "Currently serving #{katz_deli.first}."
+    katz_deli.shift
+  end
